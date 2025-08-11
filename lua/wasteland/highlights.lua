@@ -123,6 +123,21 @@ function M.setup(opts)
 	vim.cmd(string.format("hi SnacksDashboardDesc guifg=%s gui=bold", colors.glow))
 	vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.glow))
 	vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.glow))
+
+	-- Also set up autocmd to reapply Snacks highlights after plugins load
+	vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+		pattern = "*",
+		callback = function()
+			if vim.g.colors_name == "wasteland" then
+				vim.schedule(function()
+					vim.cmd(string.format("hi SnacksDashboardHeader guifg=%s gui=bold", colors.glow))
+					vim.cmd(string.format("hi SnacksDashboardDesc guifg=%s gui=bold", colors.glow))
+					vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.glow))
+					vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.glow))
+				end)
+			end
+		end,
+	})
 end
 
 return M
