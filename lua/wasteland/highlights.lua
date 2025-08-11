@@ -13,140 +13,110 @@ function M.setup(opts)
 	vim.o.background = "dark"
 	vim.o.termguicolors = true
 
-	local highlights = {
-		-- Editor highlights
-		Normal = { fg = colors.text, bg = colors.base },
-		NormalFloat = { fg = colors.text, bg = colors.surface },
-		NormalNC = { fg = colors.text, bg = colors.base },
+	-- Apply highlights using vim commands
+	vim.cmd(string.format("hi Normal guifg=%s guibg=%s", colors.text, colors.base))
+	vim.cmd(string.format("hi NormalFloat guifg=%s guibg=%s", colors.text, colors.surface))
+	vim.cmd(string.format("hi NormalNC guifg=%s guibg=%s", colors.text, colors.base))
 
-		-- Cursor and selection
-		Cursor = { fg = colors.base, bg = colors.glow },
-		CursorLine = { bg = colors.highlightLow },
-		CursorLineNr = { fg = colors.glow, bold = true },
-		LineNr = { fg = colors.muted },
-		Visual = { bg = colors.overlay },
-		VisualNOS = { bg = colors.overlay },
+	-- Cursor and selection
+	vim.cmd(string.format("hi Cursor guifg=%s guibg=%s", colors.base, colors.glow))
+	vim.cmd(string.format("hi CursorLine guibg=%s", colors.highlightLow))
+	vim.cmd(string.format("hi CursorLineNr guifg=%s gui=bold", colors.glow))
+	vim.cmd(string.format("hi LineNr guifg=%s", colors.muted))
+	vim.cmd(string.format("hi Visual guibg=%s", colors.overlay))
+	vim.cmd(string.format("hi VisualNOS guibg=%s", colors.overlay))
 
-		-- Search
-		Search = { fg = colors.base, bg = colors.warn },
-		IncSearch = { fg = colors.base, bg = colors.glow },
+	-- Search
+	vim.cmd(string.format("hi Search guifg=%s guibg=%s", colors.base, colors.warn))
+	vim.cmd(string.format("hi IncSearch guifg=%s guibg=%s", colors.base, colors.glow))
 
-		-- Syntax highlighting
-		Comment = { fg = colors.muted, italic = true },
-		Constant = { fg = colors.burnt },
-		String = { fg = colors.ok },
-		Character = { fg = colors.ok },
-		Number = { fg = colors.burnt },
-		Boolean = { fg = colors.burnt },
-		Float = { fg = colors.burnt },
+	-- Syntax highlighting
+	vim.cmd(string.format("hi Comment guifg=%s gui=italic", colors.muted))
+	vim.cmd(string.format("hi Constant guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi String guifg=%s", colors.ok))
+	vim.cmd(string.format("hi Character guifg=%s", colors.ok))
+	vim.cmd(string.format("hi Number guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi Boolean guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi Float guifg=%s", colors.burnt))
 
-		Identifier = { fg = colors.text },
-		Function = { fg = colors.glow },
+	vim.cmd(string.format("hi Identifier guifg=%s", colors.text))
+	vim.cmd(string.format("hi Function guifg=%s", colors.glow))
 
-		Statement = { fg = colors.rust },
-		Conditional = { fg = colors.rust },
-		Repeat = { fg = colors.rust },
-		Label = { fg = colors.rust },
-		Operator = { fg = colors.text },
-		Keyword = { fg = colors.rust },
-		Exception = { fg = colors.rust },
+	vim.cmd(string.format("hi Statement guifg=%s", colors.rust))
+	vim.cmd(string.format("hi Conditional guifg=%s", colors.rust))
+	vim.cmd(string.format("hi Repeat guifg=%s", colors.rust))
+	vim.cmd(string.format("hi Label guifg=%s", colors.rust))
+	vim.cmd(string.format("hi Operator guifg=%s", colors.text))
+	vim.cmd(string.format("hi Keyword guifg=%s", colors.rust))
+	vim.cmd(string.format("hi Exception guifg=%s", colors.rust))
 
-		PreProc = { fg = colors.warn },
-		Include = { fg = colors.warn },
-		Define = { fg = colors.warn },
-		Macro = { fg = colors.warn },
-		PreCondit = { fg = colors.warn },
+	vim.cmd(string.format("hi PreProc guifg=%s", colors.warn))
+	vim.cmd(string.format("hi Include guifg=%s", colors.warn))
+	vim.cmd(string.format("hi Define guifg=%s", colors.warn))
+	vim.cmd(string.format("hi Macro guifg=%s", colors.warn))
+	vim.cmd(string.format("hi PreCondit guifg=%s", colors.warn))
 
-		Type = { fg = colors.glow },
-		StorageClass = { fg = colors.glow },
-		Structure = { fg = colors.glow },
-		Typedef = { fg = colors.glow },
+	vim.cmd(string.format("hi Type guifg=%s", colors.glow))
+	vim.cmd(string.format("hi StorageClass guifg=%s", colors.glow))
+	vim.cmd(string.format("hi Structure guifg=%s", colors.glow))
+	vim.cmd(string.format("hi Typedef guifg=%s", colors.glow))
 
-		Special = { fg = colors.burnt },
-		SpecialChar = { fg = colors.burnt },
-		Tag = { fg = colors.burnt },
-		Delimiter = { fg = colors.text },
-		SpecialComment = { fg = colors.muted },
-		Debug = { fg = colors.err },
+	vim.cmd(string.format("hi Special guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi SpecialChar guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi Tag guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi Delimiter guifg=%s", colors.text))
+	vim.cmd(string.format("hi SpecialComment guifg=%s", colors.muted))
+	vim.cmd(string.format("hi Debug guifg=%s", colors.err))
 
-		-- UI elements
-		Pmenu = { fg = colors.text, bg = colors.surface },
-		PmenuSel = { fg = colors.base, bg = colors.glow },
-		PmenuSbar = { bg = colors.overlay },
-		PmenuThumb = { bg = colors.muted },
+	-- UI elements
+	vim.cmd(string.format("hi Pmenu guifg=%s guibg=%s", colors.text, colors.surface))
+	vim.cmd(string.format("hi PmenuSel guifg=%s guibg=%s", colors.base, colors.glow))
+	vim.cmd(string.format("hi PmenuSbar guibg=%s", colors.overlay))
+	vim.cmd(string.format("hi PmenuThumb guibg=%s", colors.muted))
 
-		StatusLine = { fg = colors.text, bg = colors.surface },
-		StatusLineNC = { fg = colors.muted, bg = colors.surface },
+	vim.cmd(string.format("hi StatusLine guifg=%s guibg=%s", colors.text, colors.surface))
+	vim.cmd(string.format("hi StatusLineNC guifg=%s guibg=%s", colors.muted, colors.surface))
 
-		TabLine = { fg = colors.muted, bg = colors.surface },
-		TabLineSel = { fg = colors.glow, bg = colors.base },
-		TabLineFill = { bg = colors.surface },
+	vim.cmd(string.format("hi TabLine guifg=%s guibg=%s", colors.muted, colors.surface))
+	vim.cmd(string.format("hi TabLineSel guifg=%s guibg=%s", colors.glow, colors.base))
+	vim.cmd(string.format("hi TabLineFill guibg=%s", colors.surface))
 
-		-- Splits and windows
-		VertSplit = { fg = colors.overlay },
-		WinSeparator = { fg = colors.overlay },
+	-- Splits and windows
+	vim.cmd(string.format("hi VertSplit guifg=%s", colors.overlay))
+	vim.cmd(string.format("hi WinSeparator guifg=%s", colors.overlay))
 
-		-- Diagnostics
-		DiagnosticError = { fg = colors.err },
-		DiagnosticWarn = { fg = colors.warn },
-		DiagnosticInfo = { fg = colors.glow },
-		DiagnosticHint = { fg = colors.muted },
+	-- Diagnostics
+	vim.cmd(string.format("hi DiagnosticError guifg=%s", colors.err))
+	vim.cmd(string.format("hi DiagnosticWarn guifg=%s", colors.warn))
+	vim.cmd(string.format("hi DiagnosticInfo guifg=%s", colors.glow))
+	vim.cmd(string.format("hi DiagnosticHint guifg=%s", colors.muted))
 
-		-- Git signs
-		GitSignsAdd = { fg = colors.ok },
-		GitSignsChange = { fg = colors.warn },
-		GitSignsDelete = { fg = colors.err },
+	-- Git signs
+	vim.cmd(string.format("hi GitSignsAdd guifg=%s", colors.ok))
+	vim.cmd(string.format("hi GitSignsChange guifg=%s", colors.warn))
+	vim.cmd(string.format("hi GitSignsDelete guifg=%s", colors.err))
 
-		-- LazyVim Dashboard
-		LazyH1 = { fg = colors.glow, bold = true },
-		LazyH2 = { fg = colors.rust, bold = true },
-		LazyButton = { fg = colors.text, bg = colors.overlay },
-		LazyButtonActive = { fg = colors.base, bg = colors.glow, bold = true },
-		LazySpecial = { fg = colors.burnt },
-		LazyDir = { fg = colors.ok },
-		LazyUrl = { fg = colors.glow, underline = true },
-		LazyCommit = { fg = colors.muted },
-		LazyNormal = { fg = colors.text, bg = colors.base },
-		LazyValue = { fg = colors.burnt },
-		LazyComment = { fg = colors.muted, italic = true },
-		LazyProp = { fg = colors.text },
-		LazyReasonPlugin = { fg = colors.glow },
-		LazyReasonEvent = { fg = colors.warn },
-		LazyReasonKeys = { fg = colors.ok },
-		LazyReasonStart = { fg = colors.rust },
-		LazyReasonSource = { fg = colors.burnt },
-		LazyReasonFt = { fg = colors.muted },
-		LazyReasonCmd = { fg = colors.text },
-		LazyReasonImport = { fg = colors.glow },
-
-		-- Tree-sitter highlights (modern syntax highlighting)
-		["@comment"] = { fg = colors.muted, italic = true },
-		["@constant"] = { fg = colors.burnt },
-		["@constant.builtin"] = { fg = colors.burnt },
-		["@string"] = { fg = colors.ok },
-		["@number"] = { fg = colors.burnt },
-		["@boolean"] = { fg = colors.burnt },
-		["@function"] = { fg = colors.glow },
-		["@function.builtin"] = { fg = colors.glow },
-		["@keyword"] = { fg = colors.rust },
-		["@keyword.function"] = { fg = colors.rust },
-		["@type"] = { fg = colors.glow },
-		["@variable"] = { fg = colors.text },
-		["@variable.builtin"] = { fg = colors.burnt },
-		["@operator"] = { fg = colors.text },
-		["@punctuation"] = { fg = colors.text },
-
-		-- LSP semantic tokens
-		["@lsp.type.class"] = { fg = colors.glow },
-		["@lsp.type.function"] = { fg = colors.glow },
-		["@lsp.type.variable"] = { fg = colors.text },
-		["@lsp.type.keyword"] = { fg = colors.rust },
-	}
-
-	-- Apply all highlights
-	for group, opts in pairs(highlights) do
-		vim.api.nvim_set_hl(0, group, opts)
-	end
+	-- LazyVim Dashboard (THE KEY PART!)
+	vim.cmd(string.format("hi LazyH1 guifg=%s gui=bold", colors.glow))
+	vim.cmd(string.format("hi LazyH2 guifg=%s gui=bold", colors.rust))
+	vim.cmd(string.format("hi LazyButton guifg=%s guibg=%s", colors.text, colors.overlay))
+	vim.cmd(string.format("hi LazyButtonActive guifg=%s guibg=%s gui=bold", colors.base, colors.glow))
+	vim.cmd(string.format("hi LazySpecial guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi LazyDir guifg=%s", colors.ok))
+	vim.cmd(string.format("hi LazyUrl guifg=%s gui=underline", colors.glow))
+	vim.cmd(string.format("hi LazyCommit guifg=%s", colors.muted))
+	vim.cmd(string.format("hi LazyNormal guifg=%s guibg=%s", colors.text, colors.base))
+	vim.cmd(string.format("hi LazyValue guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi LazyComment guifg=%s gui=italic", colors.muted))
+	vim.cmd(string.format("hi LazyProp guifg=%s", colors.text))
+	vim.cmd(string.format("hi LazyReasonPlugin guifg=%s", colors.glow))
+	vim.cmd(string.format("hi LazyReasonEvent guifg=%s", colors.warn))
+	vim.cmd(string.format("hi LazyReasonKeys guifg=%s", colors.ok))
+	vim.cmd(string.format("hi LazyReasonStart guifg=%s", colors.rust))
+	vim.cmd(string.format("hi LazyReasonSource guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi LazyReasonFt guifg=%s", colors.muted))
+	vim.cmd(string.format("hi LazyReasonCmd guifg=%s", colors.text))
+	vim.cmd(string.format("hi LazyReasonImport guifg=%s", colors.glow))
 end
 
 return M
