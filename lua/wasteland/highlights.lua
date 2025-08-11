@@ -118,15 +118,11 @@ function M.setup(opts)
 	vim.cmd(string.format("hi LazyReasonCmd guifg=%s", colors.text))
 	vim.cmd(string.format("hi LazyReasonImport guifg=%s", colors.glow))
 
-	-- Snacks Dashboard Update
-	vim.cmd(string.format("hi SnacksDashboardDesc guifg=%s gui=bold", colors.glow))
-	vim.cmd(string.format("hi SnacksDashboardTitle guifg=%s gui=bold", colors.glow))
+	-- Snacks Dashboard (THIS IS WHAT WE NEED!)
 	vim.cmd(string.format("hi SnacksDashboardHeader guifg=%s gui=bold", colors.glow))
-	vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.rust))
-	vim.cmd(string.format("hi SnacksDashboardIcon guifg=%s", colors.burnt))
-	vim.cmd(string.format("hi SnacksDashboardFile guifg=%s", colors.text))
-	vim.cmd(string.format("hi SnacksDashboardDir guifg=%s", colors.ok))
-	vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.muted))
+	vim.cmd(string.format("hi SnacksDashboardDesc guifg=%s gui=bold", colors.glow))
+	vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.glow))
+	vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.glow))
 end
 
 return M
