@@ -96,7 +96,7 @@ function M.setup(opts)
 	vim.cmd(string.format("hi GitSignsChange guifg=%s", colors.warn))
 	vim.cmd(string.format("hi GitSignsDelete guifg=%s", colors.err))
 
-	-- LazyVim Dashboard (THE KEY PART!)
+	-- LazyVim Dashboard
 	vim.cmd(string.format("hi LazyH1 guifg=%s gui=bold", colors.glow))
 	vim.cmd(string.format("hi LazyH2 guifg=%s gui=bold", colors.rust))
 	vim.cmd(string.format("hi LazyButton guifg=%s guibg=%s", colors.text, colors.overlay))
@@ -124,17 +124,56 @@ function M.setup(opts)
 	vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.glow))
 	vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.glow))
 
-	-- Also set up autocmd to reapply Snacks highlights after plugins load
-	vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+	-- Dashboard footer numbers and stats
+	vim.cmd(string.format("hi SnacksDashboardSpecial guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi SnacksDashboardValue guifg=%s", colors.burnt))
+
+	-- nvim-web-devicons (File icons)
+	vim.cmd(string.format("hi DevIconDefault guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconLua guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconJs guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconTs guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconPy guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconHtml guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconCss guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconJson guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconMd guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconYml guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconToml guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconGit guifg=%s", colors.burnt))
+	vim.cmd(string.format("hi DevIconDockerfile guifg=%s", colors.burnt))
+
+	-- Directory and file icons
+	vim.cmd(string.format("hi Directory guifg=%s gui=bold", colors.glow))
+	vim.cmd(string.format("hi NvimTreeFolderIcon guifg=%s", colors.glow))
+	vim.cmd(string.format("hi NvimTreeFileIcon guifg=%s", colors.burnt))
+
+	-- Try multiple autocmds with different timings
+	vim.api.nvim_create_autocmd({ "VimEnter" }, {
 		pattern = "*",
 		callback = function()
 			if vim.g.colors_name == "wasteland" then
-				vim.schedule(function()
-					vim.cmd(string.format("hi SnacksDashboardHeader guifg=%s gui=bold", colors.glow))
-					vim.cmd(string.format("hi SnacksDashboardDesc guifg=%s gui=bold", colors.glow))
-					vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.glow))
-					vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.glow))
-				end)
+				vim.cmd(string.format("hi SnacksDashboardHeader guifg=%s gui=bold", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardDesc guifg=%s gui=bold", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardSpecial guifg=%s", colors.burnt))
+				vim.cmd(string.format("hi SnacksDashboardValue guifg=%s", colors.burnt))
+			end
+		end,
+	})
+
+	-- Also try with User event (fires after plugins load)
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "LazyVimStarted",
+		callback = function()
+			if vim.g.colors_name == "wasteland" then
+				vim.cmd(string.format("hi SnacksDashboardHeader guifg=%s gui=bold", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardDesc guifg=%s gui=bold", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardFooter guifg=%s", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardKey guifg=%s", colors.glow))
+				vim.cmd(string.format("hi SnacksDashboardSpecial guifg=%s", colors.burnt))
+				vim.cmd(string.format("hi SnacksDashboardValue guifg=%s", colors.burnt))
 			end
 		end,
 	})
